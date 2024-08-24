@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="" xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>AI Assistant</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/control_center_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home_page_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hourly.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+</head>
+
+<body>
+    <div class="header">
+        <img src="{{ url_for('static', filename='css/images/blue_background.jpg') }}" alt="Blue Background" id="background"/>
+        <div id="title">AI Assistant</div>
+
+        <div id="options">
+            <p id="home">Home</p>
+            <p id="premium">Premium</p>
+            <p id="controls">Control Center</p>
+            <p id="about">About us</p>
+        </div>
+    </div>
+
+    <div id="home-page">
+        <div id="today">
+            <div id="weather-today">
+                <div class="temperature">
+                    <h4 id="temp">Temp</h4>
+                </div>
+    
+                <div class="other">
+                    <h4 id="feels-like">Feels like</h4>
+                    <h4 id="precipitation">Precipition</h4>
+                    <h4 id="humidity">Humidity</h4>
+                    <h4 id="wind">Wind</h4>
+                </div>
+            </div>
+
+            <div id="datetime">
+                <h1 id="time">Time</h1>
+                <h3 id="date">Date</h3>
+            </div>
+        </div>
+        
+        <div id="hourly-container">
+            <div id="hourly">
+                <div id="info">
+                    <div id="daily-highs">
+                        <h4 id="high">High</h4>
+                        <h4 id="low">Low</h4>
+                    </div>
+        
+                    <div id="other-info">
+                        <h4 id="sunrise">Sunrise</h4>
+                        <h4 id="sunset">Sunset</h4>
+                        <h4 id="wind-speed-high">Wind speed high</h4>
+                    </div>
+                </div>
+        
+                <div id="forecast">
+                    <div id="temperatures">
+                        <div id="ho1">
+                            <img id="img1" class="icon" src="{{ url_for('static', filename='resources/default') }}">
+                            <h2 id="tp1">30</h2>
+                            <h2 id="tm1">11:00</h2>
+                        </div>
+                        <div id="ho2">
+                            <img id="img2" class="icon" src="{{ url_for('static', filename='resources/default') }}">
+                            <h2 id="tp2">30</h2>
+                            <h2 id="tm2">11:00</h2>
+                        </div>
+                        <div id="ho3">
+                            <img id="img3" class="icon" src="{{ url_for('static', filename='resources/default') }}">
+                            <h2 id="tp3">30</h2>
+                            <h2 id="tm3">11:00</h2>
+                        </div>
+                        <div id="ho4">
+                            <img id="img4" class="icon" src="{{ url_for('static', filename='resources/default') }}">
+                            <h2 id="tp4">30</h2>
+                            <h2 id="tm4">11:00</h2>
+                        </div>
+                        <div id="ho5">
+                            <img id="img5" class="icon" src="{{ url_for('static', filename='resources/default') }}">
+                            <h2 id="tp5">30</h2>
+                            <h2 id="tm5">11:00</h2>
+                        </div>
+                    </div>
+        
+                    <div id="next-hour">
+                        <button id="hour-left"></button>
+                        <button id="hour-right"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="audio-container">
+            <p id="speechDetection">40%</p>
+            <div id="audio-visualizer">
+                <canvas id="circle">
+                    <img src="{{ url_for('static', filename='css/images/audio_reactive_circle.webp') }}" alt="Audio Reactive Circle" id="audio">
+                </canvas>
+            </div>
+            <p id="speechText">What time is it</p>
+            <p id="responseText">It is 3:30pm</p>
+        </div>
+
+        <div id="speech-history">
+            <div id="speech-history-header">
+                <p id="select-history">Speech history</p>
+                <button id="drop-down">
+                    <img src="{{ url_for('static', filename='css/images/drop-down.png') }}" alt="Drop Down Search History">
+                </button>
+                <button id="enlarge">
+                    <img src="{{ url_for('static', filename='css/images/enlarge.png') }}" alt="Enlarge Search History">
+                </button>
+            </div>
+
+            <div id="speech-history-content">
+                <div id="history-options">
+                    <p id="sort">Sort: most recent</p>
+                    <p id="clear">Clear</p>
+                </div>
+                <div id="conversation"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="control-center">
+        <div id="control-list">
+            <p id="command-header">Commands</p>
+            <div id="all-controls">
+                <input type="checkbox" id="time-command" checked>
+                <label id="time-label">Insert time(00:00 am) in response</label><br>
+
+                <input type="checkbox" id="date-command" checked>
+                <label id="date-label">Insert date(january 6, 2023) in response</label><br>
+
+                <input type="checkbox" id="open-close-command" checked>
+                <label id="open-close-label">Open and close application on the device</label><br>
+
+                <input type="checkbox" id="new-tab-command" checked>
+                <label id="new-tab-label">Opens a new tab</label><br>
+
+                <input type="checkbox" id="close-tab-command" checked>
+                <label id="close-tab-label">Closes the current tab</label><br>
+
+                <input type="checkbox" id="exit-full-command" checked>
+                <label id="exit-full-label">Exits full screen</label><br>
+                
+                <input type="checkbox" id="enter-full-command" checked>
+                <label id="enter-full-label">Enters full screen</label><br>
+
+                <div id="volume">
+                    <p id="volume-header">Volume controls</p>
+                    <div id="volume-controls">
+                        <input type="checkbox" id="get-volume-command" checked>
+                        <label id="get-volume-label">Insert the devices volume in response</label><br>
+
+                        <input type="checkbox" id="change-volume-command" checked>
+                        <label id="change-volume-label">Increases/decreases the devices volume</label><br>
+
+                        <input type="checkbox" id="set-volume-command" checked>
+                        <label id="set-volume-label">Sets the computer volume to a specific value</label><br>
+
+                        <input type="checkbox" id="mute-command" checked>
+                        <label id="mute-label">Mutes the devices volume</label><br>
+                    </div>
+                </div>
+
+                <input type="checkbox" id="calculator-command" checked>
+                <label id="calculator-label">Calculator</label><br>
+
+                <input type="checkbox" id="youtube-command" checked>
+                <label id="youtube-label">Youtube</label><br>
+
+                <input type="checkbox" id="activate-command" checked>
+                <label id="activate-label">Turn on/off</label><br>
+
+                <input type="checkbox" id="show-command" checked>
+                <label id="show-label">Put on shows/movies</label><br>
+
+                <input type="checkbox" id="sleep-command" checked>
+                <label id="sleep-label">Sleep</label><br>
+
+                <input type="checkbox" id="switch-tab-command" checked>
+                <label id="switch-tab-label">Switch tab</label><br>
+
+                <input type="checkbox" id="timer-command" checked>
+                <label id="timer-label">Set a timer</label><br>
+
+                <input type="checkbox" id="reminder-command" checked>
+                <label id="reminder-label">Set a reminder</label><br>
+
+                <input type="checkbox" id="joke-command" checked>
+                <label id="joke-label">Get traffic levels</label><br>
+
+                <input type="checkbox" id="translate-command" checked>
+                <label id="translate-label">Translate languages</label><br>
+
+                <input type="checkbox" id="search-command" checked>
+                <label id="search-label">Search</label><br>
+
+                <input type="checkbox" id="call-command" checked>
+                <label id="call-label">Call</label><br>
+
+                <input type="checkbox" id="fun-fact-command" checked>
+                <label id="fun-fact-label">Fun fact</label><br>
+
+                <input type="checkbox" id="press-command" checked>
+                <label id="press-label">Press key/button on screen</label><br>
+
+                <input type="checkbox" id="type-command" checked>
+                <label id="type-label">Type sentence</label><br>
+
+                <input type="checkbox" id="screen-shot-command" checked>
+                <label id="screen-shot-label">Take a screen shot</label><br>
+
+                <input type="checkbox" id="schedule-command" checked>
+                <label id="schedule-label">Align the AI assistant with a schedule</label><br>
+
+                <div id="list">
+                    <p id="list-header">List controls</p>
+                    <div id="list-controls">
+                        <input type="checkbox" id="list-edit-command" checked>
+                        <label id="list-edit-label">Add and remove items from a list</label><br>
+
+                        <input type="checkbox" id="list-clear-command" checked>
+                        <label id="list-clear-label">Clears a list</label><br>
+
+                        <input type="checkbox" id="list-check-command" checked>
+                        <label id="list-check-label">Can summarize what is on a list or check for a specific item</label><br>
+                    </div>
+                </div>
+
+                <input type="checkbox" id="pause-command" checked>
+                <label id="pause-label">Pause/unpause</label><br>
+
+                <input type="checkbox" id="screen-command" checked>
+                <label id="screen-label">Turn the screen on/off</label><br>
+
+                <input type="checkbox" id="maximize-command" checked>
+                <label id="maximize-label">Maximize image on screen</label><br>
+
+                <input type="checkbox" id="zoom-command" checked>
+                <label id="zoom-label">Zoom in or out on the screen or an image</label><br>
+
+                <input type="checkbox" id="rotate-command" checked>
+                <label id="rotate-label">Rotate an image or pdf</label><br>
+            </div>
+        </div>
+
+        <div id="control-info">
+            <div id="controls-header">
+                <p><em>return to example</em></p>
+                <img src="{{ url_for('static', filename='css/images/return.png') }}" id="return-button" alt="Return to Example">
+            </div>
+            
+            <div id="example">
+                <h2 class="control-info-header">Example</h2>
+                <p id="example-description" class="command-description">&emsp;This language model acts as an AI assistant that utilizes commands that are integrated into
+                    the generated response. These commands can either insert information such as the time, traffic levels, or weather data into the language model's
+                    response, or simply execute the command such as controlling the volume, entering full screen, or manipulating files. To customize these commands
+                    to your devices needs, you can use the control center to alter keyboard instructions and remove certain commands.
+                    <br><br>
+
+                    Examples:<br>
+                    User: What time is it<br>
+                    Output: It is currently /uTime<br>
+                    Response: It is currently 04:30pm<br>
+
+                    <br>
+                    User: Raise the volume by ten<br>
+                    Output: Alright /uVolume ' increase ten '<br>
+                    Response: Alright<br>
+
+                    <br>
+
+                    User: How do you say open the door in spanish<br>
+                    Output: Open the door in spanish is, /uTranslate ' open the door : detect : spanish '<br>
+                    Response: Open the door in spanish is, abre la puerta<br>
+                </p>
+
+                <div></div>
+            </div>
+
+            <div id="time-info">
+                <h2 class="control-info-header">Time command</h2>
+                <p id="time-description" class="command-description">&emsp;The language model inserts the command /uTime into the response and replaces the text with the
+                    current time.
+                </p>
+
+                <div class="control-options">
+                    <p>
+                        Examples:<br>
+                        User: What time is it<br>
+                        Output: It is currently /uTime<br>
+                        Response: It is currently 04:30pm<br>
+    
+                        <br>
+                        User: Tell me the time<br>
+                        Output: It is /uTime<br>
+                        Response: It is 04:30pm<br>
+                    </p>
+
+                    <div>
+                        <h2>Time format options</h2>
+
+                        <form>
+                            <input type="radio" name="time" checked>
+                            <label for="meridiem">Standard: 12:59 pm</label><br>
+                            <input type="radio" name="time">
+                            <label for="no-meridiem">No meridiem: 12:59</label><br>
+                            <input type="radio" name="time">
+                            <label for="military">Military Time: 23:59</label><br>
+                          </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="date-info">
+                <h2 class="control-info-header">Date command</h2>
+                <p id="date-description" class="command-description">&emsp;The language model inserts the command /uDate into the response and replaces the text with the
+                    current date.
+                </p>
+
+                <div class="control-options">
+                    <p>
+                        Examples:<br>
+                        User: What's the date<br>
+                        Output: Today is /uDate<br>
+                        Response: Today is July 11, 2007<br>
+    
+                        <br>
+                        User: Tell me the date<br>
+                        Output: It is /uDate<br>
+                        Response: It is Jully 11, 2007<br>
+                    </p>
+
+                    <div>
+                        <h2>Date format options</h2>
+
+                        <form>
+                            <input type="radio" name="date" checked>
+                            <label for="standard">Standard: July 11, 2007</label><br>
+                            <input type="radio" name="date">
+                            <label for="numerical">Numerical: 7/11/2007</label><br>
+                            <input type="radio" name="date">
+                            <label for="word-form">Extended: 11th of July, 2007</label><br>
+                          </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="open-close-info">
+                <h2 class="control-info-header">Open and Close Applications</h2>
+                <p id="open-close-description" class="command-description">&emsp;The language model inserts either the command /uOpen ' application ' or /uClose ' application'
+                    into the response and executes the action. The name  of the application does not have to be the exact name, though it should contain similar terminology.
+                    For example, the user may say, open my arduino software instead of the specific name(arduino IDE).
+                </p>
+                
+                <div class="control-options">
+                    <p>                    
+                        Examples:<br>
+                        User: Open the command prompt<br>
+                        Output: Okay /uOpen ' command prompt '<br>
+                        Response: Okay<br>
+    
+                        <br>
+                        User: Close Google<br>
+                        Output: Closing Google /uClose ' google '<br>
+                        Response: Closing Google<br>
+    
+                        <br>
+                        User: Enter the file system
+                        Output: Alright /uOpen' file system '<br>
+                        Response: Alright<br>
+                    </p>
+                </div>
+            </div>
+
+            <div id="new-tab-info">
+                <h2 class="control-info-header">Open a new tab</h2>
+                <p id="new-tab-description" class="command-description">&emsp;The language model inserts the command, /uNewTab, into the response and executes the action. 
+                    The default execution of the command is to use ctrl + T to open a new tab.
+                </p>
+                
+                <div class="control-options">
+                    <p>                    
+                        Examples:<br>
+                        User: Open a new tab<br>
+                        Output: Okay /uNewTab<br>
+                        Response: Okay<br>
+    
+                        <br>
+                        User: Bring me to another tab<br>
+                        Output: Opening a new tab /uNewTab<br>
+                        Response: Opening a new tab<br>
+                    </p>
+
+                    <div>
+                        <div class="keybind">
+                            <label for="keybind-input">Press your first alternate keybind:</label>
+                            <input type="text" id="keybind-input" placeholder="Press your first key" readonly><br>
+                            <label for="keybind-input">Press your second alternate keybind:</label>
+                            <input type="text" id="keybind-input" placeholder="Press your second key" readonly>
+                        </div>
+                        <button id="save-keybind">Save Keybind</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <img src="{{ url_for('static', filename='css/images/gray.webp') }}" alt="Gray Footer" id="gray-footer">
+        <p id="email">Contact us: &emsp; nathanmon7117@gmail.com</p>
+        <p id="phone">978-992-7239</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/weather.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/motion.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/audio_visualizer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/control_info.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/new_keybind.js') }}"></script>
+
+</body>
+
+</html>

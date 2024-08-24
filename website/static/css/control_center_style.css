@@ -1,0 +1,135 @@
+#control-center {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: Verdana,sans-serif;
+    line-height: 1.5;
+}
+
+#control-list {
+    display: block;
+    margin-left: 3vw;
+    margin-top: 4vh;
+    padding: 5px;
+    padding-left: 25px;
+    height: 60vh;
+    width: 25vw;
+    background-color: rgba(220, 220, 220, 0.3);
+    border-radius: 10px;
+}
+
+#command-header {
+    position: fixed;
+    font-size: 60px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+#all-controls::-webkit-scrollbar {
+    display: none;
+}
+
+#all-controls::-webkit-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#all-controls {
+    margin-left: 50px;
+    margin-top: 85px;
+    overflow: auto;
+    max-height: 53vh;
+    font-size: 16px;
+    font-style: sans-serif;
+}
+
+#all-controls * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#all-controls label:hover {
+    text-decoration: underline;
+}
+
+#volume-header,
+#list-header {
+    font-size: 35px;
+    margin: 0;
+}
+
+#volume-controls,
+#list-controls {
+    margin-left: 30px;
+}
+
+#all-controls,
+#volume-controls,
+#list-controls {
+    display: block;
+}
+
+#control-info {
+    position: sticky;
+    display: block;
+    text-align: center;
+    margin-top: 45px;
+    margin-right: 15px;
+}
+
+#controls-header {
+    display: grid;
+    grid-template-columns: 20fr 1fr;
+    align-items: center;
+    justify-items: right;
+}
+
+#return-button {
+    width: 40%;
+    margin-right: 20px;
+}
+
+.control-info-header {
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    font-size: 36px;
+}
+
+.command-description {
+    margin-top: 25px;
+    font-size: 18px;
+    width: 80%;
+    text-align: left;
+}
+
+.control-options {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.control-options div {
+    display: block;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.control-options p,
+.control-options form,
+.control-options h2,
+.control-options button,
+.keybind {
+    margin-left: 75px;
+    margin-top: 15px;
+    text-align: left;
+    font-size: 17px;
+}
+
+.control-options button {
+    margin: 0;
+    margin-top: 15px;
+    margin-left: 125px;
+}
+
+.keybind {
+    padding-left: 50px;
+}
